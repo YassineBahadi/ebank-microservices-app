@@ -1,27 +1,31 @@
-package com.yassine.ebankbot.discord;
+
+        package com.yassine.ebankbot.discord;
 
 import com.yassine.ebankbot.agents.EbankAIAgent;
 import com.zgamelogic.discord.annotations.DiscordController;
 import com.zgamelogic.discord.annotations.DiscordMapping;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.springframework.ai.chat.prompt.Prompt;
 
-/**
- * @author pc
- **/
 @DiscordController
 public class DiscordBot {
-    private EbankAIAgent ebankAIAgent;
+
+    private final EbankAIAgent ebankAIAgent;
 
     public DiscordBot(EbankAIAgent ebankAIAgent) {
         this.ebankAIAgent = ebankAIAgent;
     }
 
     @DiscordMapping
-    private void perform(MessageReceivedEvent event){
-        if(event.getAuthor().isBot()) return;
-        String query=event.getMessage().getContentRaw();
-        String response=ebankAIAgent.chat(query);
+    private void perform(MessageReceivedEvent event) {
+        if (event.getAuthor().isBot()) {
+            return;
+        }
+
+        String query = event.getMessage().getContentRaw();
+        String conversationId = event.getChannel().getId();
+
+        String response = ebankAIAgent.chat(query, conversationId);
+
         event.getChannel().sendMessage(response).queue();
     }
 }
