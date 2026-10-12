@@ -318,7 +318,7 @@ Le gestionnaire de messages suit ces étapes :
 5. Il appelle l'agent IA eBank.
 6. Il renvoie la réponse générée dans le canal Discord.
 
-![Bot Discord ebank-app](docs/images/04-discord-bot.png)
+![Bot Discord ebank-app](images/04-discord-bot.png)
 
 *Le bot `ebank-app` répond sur Discord avec la liste des clients.*
 
